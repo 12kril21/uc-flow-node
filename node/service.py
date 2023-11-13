@@ -10,7 +10,7 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = 'Example'
+    id: str = 'asd'
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'Example'
     is_public: bool = False
