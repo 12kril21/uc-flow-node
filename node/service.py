@@ -10,13 +10,13 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = 'Example'
+    id: str = 'OrderProcessor' #Идентификатор типа узла
     type: flow.NodeType.Type = flow.NodeType.Type.action
-    name: str = 'Example'
+    name: str = 'OrderProcessor' #Тех имя узла
     is_public: bool = False
-    displayName: str = 'Example'
+    displayName: str = 'Обработчик заказов' # Отображаемое имя узла
     icon: str = '<svg><text x="8" y="50" font-size="50">🤖</text></svg>'
-    description: str = 'Example'
+    description: str = 'Обработка и управление заказами' #Описание узла
     properties: List[Property] = [
         Property(
             displayName='Тестовое поле',
