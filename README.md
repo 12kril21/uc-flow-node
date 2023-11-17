@@ -16,3 +16,6 @@
 <img src='images/1.jpg' alt='Docker Dekstop N1'>
 <img src='images/2.jpg' alt='Docker Dekstop N2'>
 <img src='images/3.jpg' alt='Ngrok'>
+<img src='images/4.jpg' alt='Задание 2'>
+<img src='images/5.jpg' alt='Задание 2'>
+
