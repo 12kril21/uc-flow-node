@@ -10,7 +10,7 @@ from uc_http_requester.requester import Request
 
 
 class NodeType(flow.NodeType):
-    id: str = 'OrderProcessor' #Идентификатор типа узла
+    id: str = 'a231-1c3c1a7d80932aff46dc-35a5-4517' #Идентификатор типа узла
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'OrderProcessor' #Тех имя узла
     is_public: bool = False
@@ -26,6 +26,25 @@ class NodeType(flow.NodeType):
             description='Foo description',
             required=True,
             default='Test data',
+        ),
+        Property(
+            displayName='Числовое поле',
+            name='number_field',
+            type=Property.Type.NUMBER,
+            required=True,
+        ),
+        Property(
+            displayName='Текстовое поле',
+            name='text_field',
+            type=Property.Type.STRING,
+            required=True,
+        ),
+        Property(
+            displayName='Переключатель',
+            name='toggle',
+            type=Property.Type.BOOLEAN,
+            required=False,
+            default=False,
         )
     ]
 
@@ -38,10 +57,19 @@ class InfoView(info.Info):
 class ExecuteView(execute.Execute):
     async def post(self, json: NodeRunContext) -> NodeRunContext:
         try:
-            await json.save_result({
-                "result": json.node.data.properties['foo_field']
-            })
+            text_value = int(json.node.data.properties['text_field'])
+            number_value = json.node.data.properties['number_field']
+            toggle = json.node.data.properties['toggle']
+
+            result = text_value + number_value
+            if toggle:
+                result = str(text_value + number_value)
+            else:
+                result = text_value + number_value    
+            
+            await json.save_result({"result": result})
             json.state = RunState.complete
+
         except Exception as e:
             self.log.warning(f'Error {e}')
             await json.save_error(str(e))

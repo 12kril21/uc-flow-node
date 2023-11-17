@@ -1,4 +1,4 @@
-service_name: 'order-management'
+service_name: 'a231-1c3c1a7d80932aff46dc-35a5-4517'
 
 http:
   url: http://0.0.0.0:9000
@@ -15,8 +15,8 @@ uc_flow_node:
   register_on_start: false
   execute_view_queue_size: 500
   execute_view_workers: 5
-  private_url: https://bc90-178-209-118-100.ngrok.io
-  public_url: https://bc90-178-209-118-100.ngrok.io
+  private_url: https://6603-79-105-242-169.ngrok-free.app
+  public_url: https://6603-79-105-242-169.ngrok-free.app
   uc_flow:
-    domain: https://uc-flow-v2-prod-api.comagic.ru
-    jwt_secret: 9109a79d-74f9-45bd-b369-5e7a885421e5s
+    domain: https://uc-flow-v2-pp-api.comagic.ru
+    jwt_secret: asdafaf
