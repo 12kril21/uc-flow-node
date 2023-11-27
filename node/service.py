@@ -7,10 +7,11 @@ from uc_flow_nodes.views import info, execute
 from uc_flow_schemas import flow
 from uc_flow_schemas.flow import Property, CredentialProtocol, RunState
 from uc_http_requester.requester import Request
-
+from uc_flow_schemas.flow import OptionValue
+from uc_flow_schemas.flow import DisplayOptions
 
 class NodeType(flow.NodeType):
-    id: str = 'a231-1c3c1a7d80932aff46dc-35a5-4517' #Идентификатор типа узла
+    id: str = '97cc87fc-ae4e-4bcc-9481-7cb2aeba16db' #Идентификатор типа узла
     type: flow.NodeType.Type = flow.NodeType.Type.action
     name: str = 'OrderProcessor' #Тех имя узла
     is_public: bool = False
@@ -45,8 +46,64 @@ class NodeType(flow.NodeType):
             type=Property.Type.BOOLEAN,
             required=False,
             default=False,
-        )
-    ]
+        ),
+        Property(
+            displayName='Переключатель2',
+            name='toggle2',
+            type=Property.Type.BOOLEAN,
+            default=False,
+        ),
+        Property(
+            displayName='Выбор 1',
+            name='choice_one',
+            type=Property.Type.OPTIONS,
+            options=[
+                OptionValue(name='Значение 1', value='value1'),
+                OptionValue(name='Значение 2', value='value2')
+            ],
+            displayOptions=DisplayOptions(
+                show={'toggle2': [True]},  # Отображать, если переключатель включен
+            ),
+        ),
+        Property(
+            displayName='Выбор 2',
+            name='choice_two',
+            type=Property.Type.OPTIONS,
+            options=[
+                OptionValue(name='Значение 1', value='value1'),
+                OptionValue(name='Значение 2', value='value2')
+            ],
+            displayOptions=DisplayOptions(
+                show={'toggle2': [True]},  # Отображать, если переключатель включен
+            ),
+        ),
+
+        # Добавляем поля, которые будут отображаться в зависимости от выбора в выпадающих списках
+        Property(
+            displayName='Email',
+            name='email_field',
+            type=Property.Type.STRING,
+            displayOptions=DisplayOptions(
+                show={
+                    'choice_one': ['value1'],  # Отображать, если в первом списке выбрано "Значение 1"
+                    'choice_two': ['value1'],
+                    'toggle2': [True] # и во втором списке также выбрано "Значение 1"
+                },
+            ),
+        ),
+        Property(
+            displayName='Дата и Время',
+            name='date_time_field',
+            type=Property.Type.DATETIME,
+            displayOptions=DisplayOptions(
+                show={
+                    'choice_one': ['value2'],  # Отображать, если в обоих списках выбрано "Значение 2"
+                    'choice_two': ['value2'],
+                    'toggle2': [True]
+                },
+            ),
+        ),
+        ]
 
 
 class InfoView(info.Info):
@@ -60,7 +117,7 @@ class ExecuteView(execute.Execute):
             text_value = int(json.node.data.properties['text_field'])
             number_value = json.node.data.properties['number_field']
             toggle = json.node.data.properties['toggle']
-
+            
             result = text_value + number_value
             if toggle:
                 result = str(text_value + number_value)

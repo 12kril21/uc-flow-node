@@ -18,4 +18,9 @@
 <img src='images/3.jpg' alt='Ngrok'>
 <img src='images/4.jpg' alt='Задание 2'>
 <img src='images/5.jpg' alt='Задание 2'>
+<img src='images/6.jpg' alt='Задание 3'>
+<img src='images/7.jpg' alt='Задание 3'>
+<img src='images/8.jpg' alt='Задание 3'>
+<img src='images/9.jpg' alt='Задание 3'>
+
 
