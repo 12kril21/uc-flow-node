@@ -11,7 +11,7 @@
       },
       "console": "integratedTerminal",
       "args": [
-        "node.service",
+        "node.auto",
         "-c",
         "node/config.yaml"
       ]
